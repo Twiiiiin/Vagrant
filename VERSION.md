@@ -4,4 +4,6 @@ v0.0.2: Switching to another Vagrant VM for CentOS7.1. Machine works, proceeding
 
 v1.0.0_BETA: 2 VM working on CentOS7.1, both are bridged and usable from vagrant.
 
+v1.0.0 (stable): 2 VM working on CentOS7.1, both are bridged and usable from vagrant. Nagios is working on VM1. NRPE (plus aliases) is working on VM2, both are accessible via SSH.
+
 Project aim: Creating a simulated 2 server environment for Nagios and Tracking with NRPE.
