@@ -45,7 +45,7 @@ end
 
 ###### INIT VM 3 ###########
   config.vm.define "host1" do |host1|
-  host1.vm.box = "bento/centos-7.1"
+  host1.vm.box = "bento/centos-7.2"
 
   config.vm.network "public_network", bridge: "en0: Ethernet"
 
@@ -54,7 +54,7 @@ end
 ######### END VM3 ############
 ###### INIT VM 4 ###########
   config.vm.define "host2" do |host2|
-  host2.vm.box = "bento/centos-7.1"
+  host2.vm.box = "bento/centos-7.2"
 
   config.vm.network "public_network", bridge: "en0: Ethernet"
 
@@ -63,7 +63,7 @@ end
 ######### END VM4 ############
 ###### INIT VM 5 ###########
   config.vm.define "host3" do |host3|
-  host3.vm.box = "bento/centos-7.1"
+  host3.vm.box = "bento/centos-7.2"
 
   config.vm.network "public_network", bridge: "en0: Ethernet"
 
