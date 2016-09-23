@@ -1,7 +1,7 @@
 # Vagrant_TEST
 
-Questo è un repo di test per il versioning del mio ambiente Vagrant
+This is a test Repo for a learning vagrant+chef project
 
-Sistema:
-Macbook Pro 2012
-OSX El Capitan (latest)
+System:
+Macbook Pro 15 Mid 2012
+OSX Sierra (latest)
