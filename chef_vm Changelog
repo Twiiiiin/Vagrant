@@ -1,0 +1,19 @@
+VM created
+
+-2vcpu
+-2gb ram
+-2 Network Controllers
+  1 - NAT
+  2 - Eth Bridge
+
+Changelog:
+
+23/9/2016
+
+- Updated system
+- System has now RSA login enabled, password login is still enabled as a fallback.
+- Installed epel
+- Installed htop
+- Installed nmap
+- Installed and setup chef-server package
+- Installed and setup chef-manage package
