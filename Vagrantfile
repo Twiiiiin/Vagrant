@@ -5,7 +5,7 @@
 #Vagrant is running on OSX Sierra latest
 #The host machines are a cluster controlled by the chef machine
 
-#LAST UPDATE Fri 09/23/16 
+#LAST UPDATE Tue 09/27/16 
 
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
