@@ -15,6 +15,11 @@
 Vagrant.configure("2") do |config|
 
 
+# Enables Vagrant-Berkshelf plugin. If it is not installed please run 
+# "vagrant plugin install vagrant-berkshelf"
+
+config.berkshelf.enabled = false
+
 ###### INIT VM 1 ########### VM 1 IS NOT NEEDED RIGHT NOW 
 #  config.vm.define "nagios" do |nagios|
 #  nagios.vm.box = "bento/centos-7.1"
@@ -25,20 +30,28 @@ Vagrant.configure("2") do |config|
 #
 ######### END VM1 ############
 
-######### INIT VM2 ###########
+######### INIT VM2 ###########
  
   config.vm.define "chef" do |chef|
   chef.vm.box = "bento/centos-7.1"
-
-  config.vm.network "public_network", bridge: "en0: Ethernet"
+  config.vm.hostname = "chef"
+  config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
  
 end
+#Configure provisioner for chef VM -- Testing phase
+
+  config.vm.provision "chef_solo" do |chef_pro|
+  chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
+  chef_pro.add_recipe "init_setup"
+end
+
+
 
 #Configure hardware resources per VM
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 2000 
-    v.cpus = 2 
+    v.cpus = 2
 end
 
 ######### END VM2 ############
@@ -47,19 +60,44 @@ end
   config.vm.define "host1" do |host1|
   host1.vm.box = "bento/centos-7.1"
 
-  config.vm.network "public_network", bridge: "en0: Ethernet"
+  config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
 
 end
+
+#Configure provisioner for chef VM -- Testing phase
+
+  config.vm.provision "chef_solo" do |chef_pro|
+  chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
+  chef_pro.add_recipe "init_setup"
+end
+
+#Configure hardware resources per VM
+
+  #config.vm.provider "virtualbox" do |v|
+  #  v.memory = 2000 
+  #  v.cpus = 6
+#end
 
 ######### END VM3 ############
 ###### INIT VM 4 ###########
   config.vm.define "host2" do |host2|
   host2.vm.box = "bento/centos-7.1"
 
-  config.vm.network "public_network", bridge: "en0: Ethernet"
+  config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
 
 end
 
+  config.vm.provision "chef_solo" do |chef_pro|
+  chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
+  chef_pro.add_recipe "init_setup"
+end
+
+#Configure hardware resources per VM
+
+  #config.vm.provider "virtualbox" do |v|
+  #  v.memory = 2000 
+  #  v.cpus = 6
+#end
 ######### END VM4 ############
 ###### INIT VM 5 ###########
   config.vm.define "host3" do |host3|
