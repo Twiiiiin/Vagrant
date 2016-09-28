@@ -84,15 +84,15 @@ end
   host1.vm.hostname = "host1"
   host1.berkshelf.enabled = true
   host1.omnibus.chef_version = :latest
-  host1.vm.provision "chef_solo" do |chef_pro|
+  host1.vm.provision "chef_solo", run: "always" do |chef_pro|
     chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
     chef_pro.add_recipe "init_setup"
-    chef_pro.run_list = ["init_setup"]
+    chef_pro.run_list = "init_setup"
   config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
-
-
-#Configure provisioner for chef VM -- Testing phase
+  host1.vbguest.auto_update = true
 end
+#Configure provisioner for chef VM -- Testing phase
+
 
 
 #end
