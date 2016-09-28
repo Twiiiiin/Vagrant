@@ -1,0 +1,7 @@
+name 'init_server'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures init_server'
+long_description 'Installs/Configures init_server'
+version '0.1.0'
