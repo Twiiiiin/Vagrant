@@ -5,7 +5,8 @@
 #Vagrant is running on OSX Sierra latest
 #The host machines are a cluster controlled by the chef machine
 
-#LAST UPDATE Tue 09/27/16 
+#LAST UPDATE Fri 09/28/16 
+
 
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -15,10 +16,23 @@
 Vagrant.configure("2") do |config|
 
 
+
+# Enables Vagrant-Berkshelf plugin with 'true' flag. If it is not installed please run 
+# "vagrant plugin install vagrant-berkshelf"
+
+config.berkshelf.enabled = true
+
+# Enables Vagrant-Omnibus plugin 
+
+#config.omnibus.chef_version = :latest
+
+### VIRTUAL MACHINES CONFIG # NEW MACHINES WILL BE ADDED UNDER THE OLD ONES
+
 # Enables Vagrant-Berkshelf plugin. If it is not installed please run 
 # "vagrant plugin install vagrant-berkshelf"
 
 config.berkshelf.enabled = false
+
 
 ###### INIT VM 1 ########### VM 1 IS NOT NEEDED RIGHT NOW 
 #  config.vm.define "nagios" do |nagios|
@@ -38,12 +52,14 @@ config.berkshelf.enabled = false
   config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
  
 end
+
 #Configure provisioner for chef VM -- Testing phase
 
   config.vm.provision "chef_solo" do |chef_pro|
   chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
   chef_pro.add_recipe "init_setup"
 end
+
 
 
 
@@ -60,11 +76,21 @@ end
   config.vm.define "host1" do |host1|
   host1.vm.box = "bento/centos-7.1"
 
+  host1.vm.hostname = "host1"
+  host1.berkshelf.enabled = true
+  host1.omnibus.chef_version = :latest
+
   config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
 
 end
 
 #Configure provisioner for chef VM -- Testing phase
+
+  config.vm.provision :chef_solo do |chef_pro|
+  chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
+  chef_pro.add_recipe "init_setup"
+  chef_pro.run_list = ["init_setup"]
+
 
   config.vm.provision "chef_solo" do |chef_pro|
   chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
@@ -108,6 +134,7 @@ end
 end
 
 ######### END VM5 ############
+
 
 
   # Disable automatic box update checking. If you disable this, then
