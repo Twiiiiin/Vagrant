@@ -79,7 +79,7 @@ end
 
 ###### INIT VM 3 ###########
   config.vm.define "host1" do |host1|
-  host1.vm.box = "hexapp/centos7"
+  host1.vm.box = "bento/centos-7.1"
 
   host1.vm.hostname = "host1"
   host1.berkshelf.enabled = true
