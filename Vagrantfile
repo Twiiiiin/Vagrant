@@ -89,7 +89,7 @@ end
   chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
   chef_pro.add_recipe "init_setup"
   chef_pro.run_list = ["init_setup"]
-
+end
 
   config.vm.provision "chef_solo" do |chef_pro|
   chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
@@ -129,7 +129,6 @@ end
   host3.vm.box = "bento/centos-7.1"
 
   config.vm.network "public_network", bridge: "en0: Ethernet"
-
 end
 
 ######### END VM5 ############
