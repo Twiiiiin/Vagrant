@@ -12,9 +12,9 @@ package 'java-1.7.0-openjdk-devel'
 
 
 # Download and untar Maven
-exec "wget http://it.apache.contactlab.it/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz"
-exec "tar xzvf apache-maven-3.3.9-bin.tar.gz && rm -f apache-maven-3.3.9-bin.tar.gz"
+execute "wget http://it.apache.contactlab.it/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz"
+execute "tar xzvf apache-maven-3.3.9-bin.tar.gz && rm -f apache-maven-3.3.9-bin.tar.gz"
 
 # Copies Maven in opt and adds it to PATH
-exec "cp -rp apache-maven-3.3.9 /opt/apache-maven-3.3.9"
-exec "export PATH=/opt/apache-maven-3.3.9/bin:$PATH"
+execute "cp -rp apache-maven-3.3.9 /opt/apache-maven-3.3.9"
+execute "export PATH=/opt/apache-maven-3.3.9/bin:$PATH"
