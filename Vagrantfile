@@ -5,7 +5,7 @@
 #Vagrant is running on OSX Sierra latest
 #The host machines are a cluster controlled by the chef machine
 
-#LAST UPDATE Fri 09/28/16 
+#LAST UPDATE Fri 09/29/16 
 
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -30,12 +30,11 @@ config.berkshelf.enabled = true
 # Enables Vagrant-Berkshelf plugin. If it is not installed please run 
 # "vagrant plugin install vagrant-berkshelf"
 
-config.berkshelf.enabled = false
+#config.berkshelf.enabled = false
 
-=begin
 
   
-end
+
 ###### INIT VM 1 ########### VM 1 IS NOT NEEDED RIGHT NOW 
 #  config.vm.define "nagios" do |nagios|
 #  nagios.vm.box = "bento/centos-7.1"
@@ -50,14 +49,14 @@ end
  
   config.vm.define "chef" do |chef|
   chef.vm.box = "bento/centos-7.1"
-  config.vm.hostname = "chef"
-  config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
+  chef.vm.hostname = "chef"
+  chef.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
  
-end
+
 
 #Configure provisioner for chef VM -- Testing phase
 
-  config.vm.provision "chef_solo" do |chef_pro|
+  chef.vm.provision "chef_solo" do |chef_pro|
   chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
   chef_pro.add_recipe "init_setup"
 end
@@ -67,15 +66,12 @@ end
 
 #Configure hardware resources per VM
 
-  config.vm.provider "virtualbox" do |v|
+  chef.vm.provider "virtualbox" do |v|
     v.memory = 2000 
     v.cpus = 2
 end
 
 ######### END VM2 ############
-
-=end
-# I AM NOW WORKING ACTIVELY ON VM 3, ALL OTHER VMs ARE NOT ACTUALLY CONFIGURED
 
 ###### INIT VM 3 ###########
   config.vm.define "host1" do |host1|
@@ -93,15 +89,7 @@ end
   config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
   host1.vbguest.auto_update = true
 end
-#Configure provisioner for chef VM -- Testing phase
 
-
-
-#end
-
-  #config.vm.provision "chef_solo" do |chef_pro|
-  #chef_pro.cookbooks_path = "chef-repo/cookbooks"
-#end
 
 #Configure hardware resources per VM
 
@@ -111,10 +99,10 @@ end
 #end
 
 ######### END VM3 ############
-=begin
+
   
 end
-
+=begin
 ###### INIT VM 4 ###########
   config.vm.define "host2" do |host2|
   host2.vm.box = "bento/centos-7.1"
