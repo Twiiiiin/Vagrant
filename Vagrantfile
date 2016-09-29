@@ -5,8 +5,9 @@
 #Vagrant is running on OSX Sierra latest
 #The host machines are a cluster controlled by the chef machine
 
-#LAST UPDATE Fri 09/29/16 
+#LAST UPDATE Fri 09/28/16 
 
+#### TEST COMMENT FOR COMMITS
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -30,10 +31,8 @@ config.berkshelf.enabled = true
 # Enables Vagrant-Berkshelf plugin. If it is not installed please run 
 # "vagrant plugin install vagrant-berkshelf"
 
-#config.berkshelf.enabled = false
+config.berkshelf.enabled = false
 
-
-  
 
 ###### INIT VM 1 ########### VM 1 IS NOT NEEDED RIGHT NOW 
 #  config.vm.define "nagios" do |nagios|
@@ -49,14 +48,14 @@ config.berkshelf.enabled = true
  
   config.vm.define "chef" do |chef|
   chef.vm.box = "bento/centos-7.1"
-  chef.vm.hostname = "chef"
-  chef.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
+  config.vm.hostname = "chef"
+  config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
  
-
+end
 
 #Configure provisioner for chef VM -- Testing phase
 
-  chef.vm.provision "chef_solo" do |chef_pro|
+  config.vm.provision "chef_solo" do |chef_pro|
   chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
   chef_pro.add_recipe "init_setup"
 end
@@ -66,7 +65,7 @@ end
 
 #Configure hardware resources per VM
 
-  chef.vm.provider "virtualbox" do |v|
+  config.vm.provider "virtualbox" do |v|
     v.memory = 2000 
     v.cpus = 2
 end
@@ -80,16 +79,23 @@ end
   host1.vm.hostname = "host1"
   host1.berkshelf.enabled = true
   host1.omnibus.chef_version = :latest
-  host1.vm.provision "chef_solo", run: "always" do |chef_pro|
-    chef_pro.provisioning_path = "chef-repo"
-    chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
-    chef_pro.add_recipe "init_setup"
-    chef_pro.run_list = "init_setup"
 
   config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
-  host1.vbguest.auto_update = true
+
 end
 
+#Configure provisioner for chef VM -- Testing phase
+
+  config.vm.provision :chef_solo do |chef_pro|
+  chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
+  chef_pro.add_recipe "init_setup"
+  chef_pro.run_list = ["init_setup"]
+
+
+  config.vm.provision "chef_solo" do |chef_pro|
+  chef_pro.cookbooks_path = ["chef-repo/cookbooks"]
+  chef_pro.add_recipe "init_setup"
+end
 
 #Configure hardware resources per VM
 
@@ -99,10 +105,6 @@ end
 #end
 
 ######### END VM3 ############
-
-  
-end
-=begin
 ###### INIT VM 4 ###########
   config.vm.define "host2" do |host2|
   host2.vm.box = "bento/centos-7.1"
@@ -128,6 +130,7 @@ end
   host3.vm.box = "bento/centos-7.1"
 
   config.vm.network "public_network", bridge: "en0: Ethernet"
+
 end
 
 ######### END VM5 ############
@@ -188,6 +191,5 @@ end
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
-=end
 end
 end
