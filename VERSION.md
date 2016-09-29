@@ -8,4 +8,6 @@ v1.0.0 (stable): 2 VM working on CentOS7.1, both are bridged and usable from vag
 
 v2.0.0 (stable): There are 5 VMs working on CentOS7.1, 4 are used for a chef-controlled cluster, led by "chef" vm. Vagrantfile is found in the Master branch. "chef" vm is configured for RSA credential access only. 
 
-Project aim: Creating a simulated 2 server environment for Nagios and Tracking with NRPE.
+v3.0.0 (stable): There are 2 VMs working, first one is a Chef Server, second one is a node. Work on cookbooks started successfully
+
+Project aim: Creating a simulated 2 server environment for Chef-Server + node.
