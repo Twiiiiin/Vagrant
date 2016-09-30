@@ -1,0 +1,7 @@
+name 'maven_1.0.0'
+maintainer 'Twin'
+maintainer_email 'twin.flavio@gmail.com'
+license 'all_rights'
+description 'Installs/Configures Maven'
+long_description 'Installs/Configures Apache Maven'
+version '1.0.0'

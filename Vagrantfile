@@ -28,12 +28,6 @@ config.berkshelf.enabled = true
 
 ### VIRTUAL MACHINES CONFIG # NEW MACHINES WILL BE ADDED UNDER THE OLD ONES
 
-# Enables Vagrant-Berkshelf plugin. If it is not installed please run 
-# "vagrant plugin install vagrant-berkshelf"
-
-config.berkshelf.enabled = false
-
-
 ###### INIT VM 1 ########### VM 1 IS NOT NEEDED RIGHT NOW 
 #  config.vm.define "nagios" do |nagios|
 #  nagios.vm.box = "bento/centos-7.1"
@@ -48,9 +42,9 @@ config.berkshelf.enabled = false
  
   config.vm.define "chef" do |chef|
   chef.vm.box = "bento/centos-7.1"
-  config.vm.hostname = "chef"
-  config.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
- 
+  chef.vm.hostname = "chef"
+  chef.vm.network "public_network", bridge: "en0: Ethernet", mode: "DHCP"
+  chef.berkshelf.enabled = true
 end
 
 #Configure provisioner for chef VM -- Testing phase
@@ -126,11 +120,14 @@ end
 #end
 ######### END VM4 ############
 ###### INIT VM 5 ###########
-  config.vm.define "host3" do |host3|
+  config.vm.define "host3-ga" do |host3|
   host3.vm.box = "bento/centos-7.1"
 
   config.vm.network "public_network", bridge: "en0: Ethernet"
-
+end
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 4000
+    v.cpus = 4
 end
 
 ######### END VM5 ############
